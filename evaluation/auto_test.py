@@ -30,7 +30,7 @@ class Instance():
         self.avd_name = f"{src_avd_name}_{self.idx}"
         self.tar_avd_dir, self.tar_ini_file = clone_avd(src_avd_name, self.avd_name, sdk_path)
 
-    def initialize_single_task(self):
+    def initialize_single_task(self, config = None):
         avd_name = self.avd_name
         print_with_color(f"Starting Android Emulator with AVD name: {avd_name}", "blue")
         if not os.path.exists(self.config.avd_log_dir):

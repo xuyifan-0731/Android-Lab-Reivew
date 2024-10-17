@@ -1,37 +1,40 @@
-# Android United: 开发和评估Android智能体的可复现环境
+# AndroidLab: 开发和评估可重现环境中的 Android Agents
 
-英文版的README可以在[这里](README.md)找到。
+英文版本的 README 请点击 [这里](README.md)。
 
-<p align="center">
-    <a href="https://arxiv.org/abs/" target="_blank">📃 论文 </a> 
-</p>
+自主代理在与现实世界交互中变得越来越重要。Android agents是最近被频繁提及的交互方式。然而，现有关于开发和评估 Android agents 的研究在可重现性和任务难度的结合上表现不足。在本工作中，我们提出了 AndroidLab 作为一个系统化的 Android agent 框架。它包含了一个具有操作模式、操作空间和可重现基准的操作环境——AndroidEval。它支持在同一操作空间中使用大型语言模型（LLMs）和多模态模型（LMMs）。AndroidEval 包含预定义的 Android 虚拟设备和基于这些设备构建的跨九款应用的 138 个任务。利用 AndroidLab 环境，我们开发了 Android Instruction 数据集，并训练了六个开源 LLM 和 LMM，将 LLM 的平均成功率从 4.56% 提升到 16.43%，LMM 从 1.93% 提升到 11.83%。
 
-这个仓库是Android Eval部分的代码框架。我们提供了两种执行模式：Mac上的AVD（arm64）和Linux上的Docker（x86_64）。您可以根据我们的框架自由添加或修改新的任务或Android镜像。我们提供了一个完整的评估框架，可以用于评估各种Android智能体的性能。我们也在推进更强大的开源Android智能体的设计，并将在数据和训练方法最终确定后发布完整的训练数据和相应的训练代码。
+该代码库是 Android Eval 部分的代码框架。我们提供了两种执行模式：在 Mac（arm64）上的 AVD 模式和在 Linux（x86_64）上的 Docker 模式。您可以根据我们的框架自由添加或修改新任务或 Android 镜像。我们提供了完整的评估框架，可用于评估各种 Android agents 的性能。
 
-![](./assets/main-picture.png)
+![](./assets/main-picture-updated-v2.png)
 
-# Benchmark组成
+# 基准测试组件
 
-在我们的实验中，我们使用了一系列应用程序进行了各种测试。选择的移动应用程序如下：
+在我们的实验中，我们利用了一系列应用程序来进行各种测试。选择的移动应用程序如下：
 
-- **Bluecoins**: 一个用于管理个人财务、跟踪支出和收入的应用程序。
-- **Calendar**: 一个帮助组织日程安排和设置提醒的日历应用。
-- **Cantook**: 一个用于存储、管理和阅读电子书的电子书阅读器。
-- **Clock**: 一个显示时间、设置闹钟和使用秒表的时钟应用。
-- **Contacts**: 一个用于存储和组织联系人信息的联系人管理应用。
-- **Maps.me**: 一个用于导航和探索位置的离线地图应用。
-- **PiMusic**: 一个用于组织和播放本地存储音乐文件的音乐播放器应用。
-- **Settings**: 一个用于配置设备设置和偏好的设置应用。
-- **Zoom**: 一个用于主持和参加在线会议的视频会议应用。
+- **Bluecoins**: 一个个人财务管理应用程序，用于跟踪支出和收入。
+- **Calendar**: 一个日历应用程序，帮助组织日程安排和设置提醒。
+- **Cantook**: 一个电子书阅读器，用于存储、管理和阅读电子书。
+- **Clock**: 一个时钟应用程序，用于显示时间、设置闹钟和使用秒表。
+- **Contacts**: 一个联系人管理应用程序，用于存储和组织联系信息。
+- **Maps.me**: 一个离线地图应用程序，用于导航和探索位置。
+- **PiMusic**: 一个音乐播放器应用程序，用于组织和播放本地存储的音乐文件。
+- **Settings**: 一个设置应用程序，用于配置设备设置和偏好。
+- **Zoom**: 一个视频会议应用程序，用于主持和参加在线会议。
 
-这些应用程序的选择标准是每个应用程序必须独立运行，无需互联网连接或用户账户登录。这确保了评估在相同条件下可以始终如一地进行，消除了外部依赖，并降低了隐私泄露的风险。因此，这种方法保持了我们结果的可靠性和可复现性。
+这些应用的选择经过了多次迭代，以确保它们适合我们的评估目的。最终选择的关键标准是每个应用必须能够独立运行，不需要互联网连接或用户账户登录。这确保了评估可以在相同条件下始终如一地重复进行，消除了外部依赖并减少了隐私泄露的风险。因此，这种方法保持了我们结果的可靠性和可重复性。
 
 ![](./assets/avd-subgoal-subcates.png)
+
 # 排行榜
 
-XML和SoM模式的主要结果。SR、Sub-SR、RRR和ROR分别代表成功率、子目标成功率、冗余率和合理操作率。对于所有这些指标，数值越高表示越好。**-ft**表示指令微调模型。在每个模式下，**加粗**表示最佳结果，**下划线**表示次佳结果。
+XML 和 SoM 模式的主要结果。SR、Sub-SR、RRR 和 ROR 分别代表成功率、子目标成功率、反向冗余率和合理操作率。对于所有这些指标，值越高越好。**-ft** 代表一个指令微调模型。在每种模式下，**加粗** 代表最好的结果。
 
 ![](./assets/leaderboard.png)
+
+通过使用 Android Instruct 数据集，我们训练了六个开源的文本和多模态模型，分别实现了 395% 和 896% 的平均提升，达到了与专有模型相当的性能水平。
+
+![](./assets/before-after-sft-updated.png)
 
 
 # 快速开始
@@ -46,8 +49,8 @@ XML和SoM模式的主要结果。SR、Sub-SR、RRR和ROR分别代表成功率、
 
 ```bash
 cd /path/to/your/repo
-conda create -n Android-United python=3.11
-conda activate Android-United
+conda create -n Android-Lab python=3.11
+conda activate Android-Lab
 pip install -r requirements.txt
 ```
 

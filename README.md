@@ -1,24 +1,12 @@
-# Android United: Developing and Evaluating Android Agents in A Reproducible Environment
+# AndroidLab: Developing and Evaluating Android Agents in A Reproducible Environment
 
 Chinese version of this README is available [here](README_CN.md).
 
-Autonomous agents have become increasingly important for interacting with the real world. 
-Android agents, in particular, have been a frequently mentioned interaction method in recent research. 
-However, current benchmarks for evaluating Android agents still require further development. 
-They lack a good combination of reproducibility and task difficulty. 
-In this work, we propose Android United as a powerful Android agent framework. 
-It includes an operation environment with operation modes and action space, as well as a reproducible benchmark---Android Eval. 
-By `United', it supports both text-based and multi-modal models in the same action space. 
-Android Eval comprises a set of predefined Android virtual images and 138 tasks across nine apps designed based on these images. 
-By using this environment, we develop the Android Instruction dataset and train the LLaMA3-8B-instruct, GLM-4, and CogVLM2 (LLaMA3-8B) models on it. The trained models as Android agents are comparable to the best open and closed-source models, respectively. 
+Autonomous agents have become increasingly important for interacting with the real world. Android agents, in particular, have been recently a frequently-mentioned interaction method. However, existing studies for developing and evaluating Android agents lack a good combination of reproducibility and task difficulty. In this work, we propose AndroidLab as a systematic Android agent framework. It includes an operation environment with operation modes, action space, and a reproducible benchmark---AndroidEval. It supports both large language models (LLMs) and multimodal models (LMMs) in the same action space. AndroidEval includes predefined Android virtual devices and 138 tasks across nine apps built on these devices. Using the AndroidLab environment, we develop an Android Instruction dataset and train six open-source LLMs and LMMs, lifting the average success rates from 4.56% to 16.43% for LLMs and from 1.93% to 11.83% for LMMs.
 
-<p align="center">
-    <a href="https://arxiv.org/abs/" target="_blank">📃 Paper </a> 
-</p>
+This repository is the code framework for the Android Eval section. We provide two execution modes: AVD on Mac (arm64) and Docker on Linux (x86_64). You can freely add or modify new tasks or Android images according to our framework. We offer a complete evaluation framework that can be used to assess the performance of various Android agents. 
 
-This repository is the code framework for the Android Eval section. We provide two execution modes: AVD on Mac (arm64) and Docker on Linux (x86_64). You can freely add or modify new tasks or Android images according to our framework. We offer a complete evaluation framework that can be used to assess the performance of various Android agents. We are also advancing the design of a more powerful open-source Android Agent, and we will release the complete training data and corresponding training code, along with checkpoints, once the data and training methods are finalized.
-
-![](./assets/main-picture.png)
+![](./assets/main-picture-updated-v2.png)
 
 # Benchmark Components
 
@@ -39,10 +27,13 @@ The selection of these apps underwent multiple iterations to ensure their suitab
 ![](./assets/avd-subgoal-subcates.png)
 # Leaderboard
 
-Main Result of XML and SoM modes. SR, Sub-SR, RRR, and ROR stand for Success Rate, Sub-Goal Success Rate, Reversed Redundancy Ratio, and Reasonable Operation Ratio, respectively. For all these metrics, a higher value means better. **-ft** represents an instruction tuning model. In each mode, **Bold** represents the best result, and **Underline** represents the second-best result.
+Main Result of XML and SoM modes. SR, Sub-SR, RRR, and ROR stand for Success Rate, Sub-Goal Success Rate, Reversed Redundancy Ratio, and Reasonable Operation Ratio, respectively. For all these metrics, a higher value means better. **-ft** represents an instruction tuning model. In each mode, **Bold** represents the best result.
 
 ![](./assets/leaderboard.png)
 
+By using Android Instruct dataset, we trained six open-source text-only and multimodal models, achieving an average increase of 395% and 896%, respectively, reaching a performance level comparable to proprietary models.
+
+![](./assets/before-after-sft-updated.png)
 
 # Quick start
 
@@ -56,8 +47,8 @@ Clone this repo and install the dependencies.
 
 ```bash
 cd /path/to/your/repo
-conda create -n Android-United python=3.11
-conda activate Android-United
+conda create -n Android-Lab python=3.11
+conda activate Android-Lab
 pip install -r requirements.txt
 ```
 

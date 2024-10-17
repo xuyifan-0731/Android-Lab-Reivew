@@ -197,7 +197,6 @@ class SingleTask_Mapme_12(SingleTask):
         if not self.judge_page(xml_compressed_tree):
             return {"judge_page": False}
 
-        print("Stanford, My location, Start are all in the page")
         return {"judge_page": True, "1": True, "complete": True}
 
 
@@ -217,7 +216,6 @@ class SingleTask_Mapme_13(SingleTask):
         if not self.judge_page(xml_compressed_tree):
             return {"judge_page": False}
 
-        print("University South, My location, Start are all in the page")
         return {"judge_page": True, "1": True, "complete": True}
 
 
@@ -237,7 +235,6 @@ class SingleTask_Mapme_14(SingleTask):
         if not self.judge_page(xml_compressed_tree):
             return {"judge_page": False}
 
-        print("OpenAI, My location, Start are all in the page")
         return {"judge_page": True, "1": True, "complete": True}
 
 
@@ -257,5 +254,4 @@ class SingleTask_Mapme_15(SingleTask):
         if not self.judge_page(xml_compressed_tree):
             return {"judge_page": False}
 
-        print("University of California, Berkeley, My location, Start are all in the page")
         return {"judge_page": True, "1": True, "complete": True}
